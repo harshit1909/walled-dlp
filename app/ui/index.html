@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Walled DLP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <img src="../assets/icon.png" alt="" class="logo">
+    <div class="hero-text">
+      <h1>Walled DLP</h1>
+      <p>Checks what you send to AI before it leaves your computer.</p>
+    </div>
+    <div class="pill ok" id="engine"><span class="dot"></span>Protection on</div>
+  </header>
+
+  <section class="stats" aria-label="Summary">
+    <div class="stat"><b id="stat-total">0</b><span>Inspected</span></div>
+    <div class="stat warn"><b id="stat-flagged">0</b><span>Flagged</span></div>
+    <div class="stat bad"><b id="stat-blocked">0</b><span>Cancelled</span></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h2>Open a site</h2></div>
+    <div class="sites">
+      <button type="button" class="btn" data-open="chatgpt">ChatGPT</button>
+      <button type="button" class="btn" data-open="perplexity">Perplexity</button>
+    </div>
+    <p class="muted-note">Everything you send from these tabs is checked here first. Sign in once and the app remembers you.</p>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h2>Policy</h2></div>
+    <div class="row"><span>Sensitive marker</span><code id="marker"></code></div>
+    <div class="row"><span>Checks</span><span class="chips"><i>Prompts</i><i>Text</i><i>PDF</i><i>Images (OCR)</i></span></div>
+    <div class="row">
+      <span>AI response colour</span>
+      <span class="colors">
+        <span id="swatches" class="swatches"></span>
+        <label class="custom" title="Pick any colour"><input type="color" id="color"><span>Custom</span></label>
+      </span>
+    </div>
+  </section>
+
+  <section class="card grow">
+    <div class="card-head"><h2>Activity</h2></div>
+    <div id="empty" class="empty">
+      <b>Nothing yet</b>
+      <span>Prompts and uploads you send on ChatGPT or Perplexity will appear here.</span>
+    </div>
+    <ul id="activity"></ul>
+  </section>
+  <script type="module" src="renderer.js"></script>
+</body>
+</html>

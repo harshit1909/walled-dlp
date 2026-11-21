@@ -1,0 +1,26 @@
+{
+  "name": "walled-dlp",
+  "version": "1.0.0",
+  "description": "Standalone desktop DLP app: a small browser for ChatGPT and Perplexity that inspects prompts and file uploads (text, PDF, image) for a sensitive marker and asks for native confirmation before anything is sent.",
+  "type": "module",
+  "main": "app/main.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "test": "node --test \"test/unit/*.test.js\"",
+    "test:e2e": "node test/e2e/run.mjs",
+    "samples": "node scripts/make-samples.mjs",
+    "probe": "node scripts/live-probe.mjs"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.2.0",
+    "@tesseract.js-data/eng": "^1.0.0",
+    "pdfjs-dist": "^6.5.438",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "electron": "^45.4.1",
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^25.18.1"
+  }
+}

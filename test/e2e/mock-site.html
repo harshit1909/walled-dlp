@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Minimal stand-in for ChatGPT / Perplexity: same composer ids, a React-style
+     delegated event model, and globals that record what "reached the site". -->
+<html>
+<body>
+  <main>
+    <div data-message-author-role="assistant"><div class="markdown"><p id="answer-chatgpt">An answer</p></div></div>
+    <div id="markdown-content-0" class="prose"><p id="answer-perplexity">An answer</p></div>
+    <div data-message-author-role="user"><p id="user-message">A question</p></div>
+  </main>
+  <form id="form">
+    <div id="prompt-textarea" contenteditable="true" role="textbox"></div>
+    <input id="file" type="file" multiple>
+    <button id="send" type="button" data-testid="send-button" aria-label="Submit">Send</button>
+  </form>
+  <script>
+    window.sent = [];
+    window.uploads = [];
+    const editor = document.getElementById('prompt-textarea');
+    const submit = () => { window.sent.push(editor.innerText); editor.innerText = ''; };
+    const upload = (files) => window.uploads.push(...[...files].map((f) => f.name));
+    // Like React: every handler is delegated to the root, in the bubble phase.
+    document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && e.target === editor) { e.preventDefault(); submit(); } });
+    document.addEventListener('click', (e) => { if (e.target.id === 'send') submit(); });
+    document.addEventListener('change', (e) => { if (e.target.type === 'file') upload(e.target.files); });
+    document.addEventListener('dragover', (e) => e.preventDefault());
+    document.addEventListener('drop', (e) => { e.preventDefault(); upload(e.dataTransfer.files); });
+    document.addEventListener('paste', (e) => { if (e.clipboardData.files.length) { e.preventDefault(); upload(e.clipboardData.files); } });
+  </script>
+</body>
+</html>
